@@ -1,0 +1,10 @@
+{
+    "type": "mysql",
+    "host": "mysqldb",
+    "port": 3306,
+    "username": "cruzeiro",
+    "password": "cruzeiro",
+    "database": "cruzeirodb",
+    "synchronize": true
+  }
+  
