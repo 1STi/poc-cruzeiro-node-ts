@@ -1,6 +1,11 @@
 import { ConnectionOptions } from 'typeorm';
 import * as database from '../config/config.json';
 
+const POSTGRES_USER = process.env.POSTGRES_USER;
+const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD;
+const POSTGRES_DB = process.env.POSTGRES_DB;
+
+console.log(POSTGRES_USER);
 // You can load you .env file here synchronously using dotenv package (not installed here),
 // import * as dotenv from 'dotenv';
 // import * as fs from 'fs';
@@ -11,14 +16,14 @@ import * as database from '../config/config.json';
 // Check typeORM documentation for more information.
 const config: ConnectionOptions = {
   ...JSON.parse(JSON.stringify(database)),
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  entities: [__dirname + '/../**/*.model{.ts,.js}'],
 
   // We are using migrations, synchronize should be set to false.
-  synchronize: true,
+  synchronize: false,
 
   // Run migrations automatically,
   // you can disable this if you prefer running migration manually.
-  migrationsRun: false,
+  migrationsRun: true,
   logging: true,
 
   // allow both start:prod and start:dev to use migrations

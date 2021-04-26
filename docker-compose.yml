@@ -1,38 +1,34 @@
 version: '3.1'
 
 services:
-  # poc-cruzeiro-node-ts:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - '3000:3000'
-  #   container_name: poc-cruzeiro-node-ts
-  #   restart: always
-  #   volumes:
-  #     - api_logs:/usr/src/node-api/logs:rw
-  #   environment:
-  #     - NODE_ENV=development
-  #   depends_on:
-  #     - mysql
-
-  mysql:
-    image: mysql:5.7
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    expose:
-      - '3306'
+  poc-cruzeiro-node-ts:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '3306:3306'
+      - '3000:3000'
+    container_name: poc-cruzeiro-node-ts
+    restart: always
     volumes:
-      - db_data:/var/lib/mysql
-    container_name: mysqldb
+      - api_logs:/usr/src/node-api/logs:rw
     environment:
-      MYSQL_ROOT_PASSWORD: cruzeiro
-      MYSQL_DATABASE: cruzeirodb
-      MYSQL_USER: cruzeiro
-      MYSQL_PASSWORD: cruzeiro
+      - NODE_ENV=development
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    container_name: postgresdb
+    environment:
+      POSTGRES_USER: '${POSTGRES_USER}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+      POSTGRES_DB: '${POSTGRES_DB}'
 
 volumes:
-  db_data: {}
+  pg_data: {}
   api_logs: {}

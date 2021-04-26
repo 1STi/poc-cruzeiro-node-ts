@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export interface IUsers {
+export interface IUser {
   id: number;
   name: string;
   email: string;

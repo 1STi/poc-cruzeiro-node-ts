@@ -4,7 +4,7 @@ import * as ormconfig from './ormconfig';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
+import { UserModule } from './xxx.domain/application/user.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(ormconfig), UserModule],
